@@ -1,0 +1,46 @@
+{
+    "Python Developer": {
+        "Python": 5,
+        "SQL": 4,
+        "Flask": 4,
+        "Git": 3,
+        "REST API": 3,
+        "HTML": 2,
+        "CSS": 2,
+        "JavaScript": 2,
+        "Docker": 2,
+        "PostgreSQL": 2
+    },
+
+    "Frontend Developer": {
+        "HTML": 5,
+        "CSS": 5,
+        "JavaScript": 5,
+        "React": 4,
+        "Git": 3,
+        "Bootstrap": 3,
+        "TypeScript": 3
+    },
+
+    "Full Stack Developer": {
+        "Python": 5,
+        "Flask": 4,
+        "SQL": 4,
+        "HTML": 4,
+        "CSS": 4,
+        "JavaScript": 4,
+        "Git": 3,
+        "REST API": 3,
+        "Docker": 2
+    },
+
+    "Data Analyst": {
+        "Python": 5,
+        "SQL": 5,
+        "Excel": 4,
+        "Power BI": 4,
+        "Pandas": 4,
+        "NumPy": 4,
+        "Matplotlib": 3
+    }
+}

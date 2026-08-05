@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Resume Report</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+</head>
+
+<body>
+
+<div class="background-shape shape1"></div>
+<div class="background-shape shape2"></div>
+
+<div class="report-container">
+
+    <div class="report-header">
+
+        <h1>
+
+            <i class="bi bi-file-earmark-check-fill"></i>
+
+            Resume Screening Report
+
+        </h1>
+
+        <p>{{ role }}</p>
+
+    </div>
+
+    <div class="score-card">
+
+        <h2>Resume Score</h2>
+
+        <div class="score-circle">
+
+            {{ percentage }}%
+
+        </div>
+
+        {% if percentage >= 90 %}
+
+        <span class="badge excellent">
+
+            Excellent Match
+
+        </span>
+
+        {% elif percentage >= 70 %}
+
+        <span class="badge good">
+
+            Good Match
+
+        </span>
+
+        {% elif percentage >= 50 %}
+
+        <span class="badge average">
+
+            Average Match
+
+        </span>
+
+        {% else %}
+
+        <span class="badge poor">
+
+            Needs Improvement
+
+        </span>
+
+        {% endif %}
+
+    </div>
+
+    <div class="cards">
+
+        <div class="skill-card">
+
+            <h3>
+
+                <i class="bi bi-check-circle-fill"></i>
+
+                Matched Skills
+
+            </h3>
+
+            <ul>
+
+                {% for skill in matched %}
+
+                <li>✔ {{ skill }}</li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+        <div class="skill-card">
+
+            <h3>
+
+                <i class="bi bi-x-circle-fill"></i>
+
+                Missing Skills
+
+            </h3>
+
+            <ul>
+
+                {% for skill in missing %}
+
+                <li>✖ {{ skill }}</li>
+
+                {% endfor %}
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="recommendation">
+
+        <h3>
+
+            <i class="bi bi-lightbulb-fill"></i>
+
+            Recommendation
+
+        </h3>
+
+        {% if percentage >= 90 %}
+
+        <p>
+            Excellent resume! Your profile closely matches the selected role. Continue building projects and keep your GitHub active.
+        </p>
+
+        {% elif percentage >= 70 %}
+
+        <p>
+            Your resume is strong. Learning the missing skills and adding one more project will make it even more competitive.
+        </p>
+
+        {% elif percentage >= 50 %}
+
+        <p>
+            You have a good foundation. Focus on the missing technologies, update your resume, and build one practical project using them.
+        </p>
+
+        {% else %}
+
+        <p>
+            Your resume needs improvement for this role. Learn the missing skills, create projects demonstrating them, and revise your resume before applying.
+        </p>
+
+        {% endif %}
+
+    </div>
+
+    <div class="buttons">
+
+        <a href="/" class="btn secondary">
+
+            <i class="bi bi-arrow-left"></i>
+
+            Analyze Another Resume
+
+        </a>
+
+       <a href="/download" class="btn primary">
+          <i class="bi bi-download"></i>
+        Download PDF Report
+       </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

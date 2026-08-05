@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATS Resume Screener</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+
+    <div class="background-shape shape1"></div>
+    <div class="background-shape shape2"></div>
+
+    <div class="container">
+
+        <div class="header">
+
+            <div class="logo">
+
+                <i class="bi bi-file-earmark-check-fill"></i>
+
+                <h1>ATS Resume Screener</h1>
+
+            </div>
+
+            <p>
+                Analyze resumes using Python & Flask. Compare resumes with job roles or custom job descriptions.
+            </p>
+
+        </div>
+
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+
+            <!-- Resume Upload -->
+
+            <div class="section">
+
+                <label>
+
+                    <i class="bi bi-upload"></i>
+
+                    Upload Resume
+
+                </label>
+
+                <input
+                    type="file"
+                    name="resume"
+                    accept=".pdf"
+                    required>
+
+            </div>
+
+            <!-- Job Role -->
+
+            <div class="section">
+
+                <label>
+
+                    <i class="bi bi-briefcase-fill"></i>
+
+                    Select Job Role
+
+                </label>
+
+                <select name="job_role">
+
+                    <option value="">Choose Job Role</option>
+
+                    <option value="Python Developer">Python Developer</option>
+
+                    <option value="Frontend Developer">Frontend Developer</option>
+
+                    <option value="Full Stack Developer">Full Stack Developer</option>
+
+                    <option value="Data Analyst">Data Analyst</option>
+
+                </select>
+
+            </div>
+
+            <div class="divider">
+
+                <span>OR</span>
+
+            </div>
+
+            <!-- Job Description -->
+
+            <div class="section">
+
+                <label>
+
+                    <i class="bi bi-card-text"></i>
+
+                    Paste Job Description
+
+                </label>
+
+                <textarea
+                    name="job_description"
+                    rows="8"
+                    placeholder="Paste the complete Job Description here (Optional if Job Role is selected)..."></textarea>
+
+            </div>
+
+            <button type="submit">
+
+                <i class="bi bi-search"></i>
+
+                Analyze Resume
+
+            </button>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>
