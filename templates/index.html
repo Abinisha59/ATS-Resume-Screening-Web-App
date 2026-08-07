@@ -2,129 +2,275 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ATS Resume Screener</title>
+
+    <title>ATS Resume Screening</title>
 
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 
-    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
 
-    <div class="background-shape shape1"></div>
-    <div class="background-shape shape2"></div>
+    <!-- Navigation -->
 
-    <div class="container">
+    <nav>
 
-        <div class="header">
+        <div class="logo">
 
-            <div class="logo">
+            ATS Resume Screening
 
-                <i class="bi bi-file-earmark-check-fill"></i>
+        </div>
 
-                <h1>ATS Resume Screener</h1>
+        <ul>
 
-            </div>
+            <li><a href="/">Home</a></li>
+
+            <li><a href="/history">History</a></li>
+
+        </ul>
+
+    </nav>
+
+    <!-- Hero Section -->
+
+    <section class="hero">
+
+        <div class="hero-text">
+
+            <h1>
+
+                Analyze Your Resume Like an ATS
+
+            </h1>
 
             <p>
-                Analyze resumes using Python & Flask. Compare resumes with job roles or custom job descriptions.
+
+                Upload your resume, compare it with a job description,
+                discover missing skills, improve your ATS score,
+                and download a professional PDF report.
+
             </p>
 
         </div>
 
-        <form action="/upload" method="POST" enctype="multipart/form-data">
+    </section>
 
-            <!-- Resume Upload -->
+    <!-- Features -->
 
-            <div class="section">
+    <section class="features">
 
-                <label>
+        <div class="card">
 
-                    <i class="bi bi-upload"></i>
+            📄
 
-                    Upload Resume
+            <h3>Resume Upload</h3>
 
-                </label>
+            <p>
 
-                <input
-                    type="file"
-                    name="resume"
-                    accept=".pdf"
-                    required>
+                Upload PDF resumes securely.
 
-            </div>
+            </p>
 
-            <!-- Job Role -->
+        </div>
 
-            <div class="section">
+        <div class="card">
 
-                <label>
+            🎯
 
-                    <i class="bi bi-briefcase-fill"></i>
+            <h3>ATS Score</h3>
 
-                    Select Job Role
+            <p>
 
-                </label>
+                Calculates your resume match percentage.
 
-                <select name="job_role">
+            </p>
 
-                    <option value="">Choose Job Role</option>
+        </div>
 
-                    <option value="Python Developer">Python Developer</option>
+        <div class="card">
 
-                    <option value="Frontend Developer">Frontend Developer</option>
+            📊
 
-                    <option value="Full Stack Developer">Full Stack Developer</option>
+            <h3>Skill Analysis</h3>
 
-                    <option value="Data Analyst">Data Analyst</option>
+            <p>
 
-                </select>
+                Shows matched and missing skills instantly.
 
-            </div>
+            </p>
+
+        </div>
+
+        <div class="card">
+
+            📥
+
+            <h3>PDF Report</h3>
+
+            <p>
+
+                Download a detailed ATS report.
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- Upload Section -->
+
+    <section class="upload-box">
+
+        <h2>
+
+            Resume Analysis
+
+        </h2>
+
+        <form
+            action="/upload"
+            method="POST"
+            enctype="multipart/form-data"
+        >
+
+            <label>
+
+                Upload Resume
+
+            </label>
+
+            <input
+                type="file"
+                name="resume"
+                accept=".pdf"
+                required
+            >
+
+            <label>
+
+                Select Job Role
+
+            </label>
+
+            <select name="job_role">
+
+                <option>Python Developer</option>
+
+                <option>Full Stack Developer</option>
+
+                <option>Frontend Developer</option>
+
+                <option>Backend Developer</option>
+
+                <option>Java Developer</option>
+
+                <option>Data Analyst</option>
+
+            </select>
 
             <div class="divider">
 
-                <span>OR</span>
+                OR
 
             </div>
 
-            <!-- Job Description -->
+            <label>
 
-            <div class="section">
+                Paste Job Description
 
-                <label>
+            </label>
 
-                    <i class="bi bi-card-text"></i>
+            <textarea
 
-                    Paste Job Description
+                name="job_description"
 
-                </label>
+                rows="10"
 
-                <textarea
-                    name="job_description"
-                    rows="8"
-                    placeholder="Paste the complete Job Description here (Optional if Job Role is selected)..."></textarea>
+                placeholder="Paste complete Job Description here..."
 
-            </div>
+            ></textarea>
 
-            <button type="submit">
+            <button>
 
-                <i class="bi bi-search"></i>
-
-                Analyze Resume
+                Analyze Resume →
 
             </button>
 
         </form>
 
-    </div>
+    </section>
+
+    <!-- How It Works -->
+
+    <section class="steps">
+
+        <h2>
+
+            How It Works
+
+        </h2>
+
+        <div class="step-container">
+
+            <div class="step">
+
+                1️⃣
+
+                <h3>Upload Resume</h3>
+
+            </div>
+
+            <div class="step">
+
+                2️⃣
+
+                <h3>Analyze Skills</h3>
+
+            </div>
+
+            <div class="step">
+
+                3️⃣
+
+                <h3>Get ATS Score</h3>
+
+            </div>
+
+            <div class="step">
+
+                4️⃣
+
+                <h3>Download Report</h3>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <footer>
+
+        <p>
+
+            Built using Python • Flask • SQLite
+
+        </p>
+
+        <p>
+
+            © 2026 Abinisha
+
+        </p>
+
+    </footer>
 
 </body>
 

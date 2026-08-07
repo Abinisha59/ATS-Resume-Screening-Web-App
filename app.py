@@ -1,13 +1,18 @@
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 from utils.file_reader import read_pdf
 from utils.skill_matcher import match_skills
-
-from flask import send_file
 from utils.report_generator import generate_report
 from utils.database_helper import save_result
-import database
+
 import sqlite3
+import database
+import os
+
+# Create folders if they don't exist
+os.makedirs("resumes", exist_ok=True)
+os.makedirs("reports", exist_ok=True)
+
 app = Flask(__name__)
 
 
@@ -20,12 +25,13 @@ def home():
 def upload():
 
     uploaded_file = request.files["resume"]
-
     job_role = request.form["job_role"]
-
     job_description = request.form["job_description"]
 
-    file_path = "resumes/" + uploaded_file.filename
+    file_path = os.path.join(
+        "resumes",
+        uploaded_file.filename
+    )
 
     uploaded_file.save(file_path)
 
@@ -51,7 +57,7 @@ def upload():
 
         role = job_role
 
-    # Generate PDF
+    # Generate PDF report
     generate_report(
         "reports/report.pdf",
         role,
@@ -59,12 +65,14 @@ def upload():
         matched,
         missing
     )
+
+    # Save to SQLite database
     save_result(
-    uploaded_file.filename,
-    role,
-    percentage,
-    matched,
-    missing
+        uploaded_file.filename,
+        role,
+        percentage,
+        matched,
+        missing
     )
 
     return render_template(
@@ -74,32 +82,29 @@ def upload():
         missing=missing,
         percentage=percentage
     )
-@app.route("/download")
 
+
+@app.route("/download")
 def download():
 
     return send_file(
-
         "reports/report.pdf",
-
         as_attachment=True
-
     )
-
 
 
 @app.route("/history")
 def history():
 
     conn = sqlite3.connect("resume.db")
-
     cursor = conn.cursor()
 
     cursor.execute("""
-        SELECT filename,
-               role,
-               score,
-               created_at
+        SELECT
+            filename,
+            role,
+            score,
+            created_at
         FROM resume_history
         ORDER BY id DESC
     """)
@@ -113,5 +118,12 @@ def history():
         history=rows
     )
 
+
 if __name__ == "__main__":
-    app.run(debug=True)
+
+    port = int(os.environ.get("PORT", 5000))
+
+    app.run(
+        host="0.0.0.0",
+        port=port
+    )

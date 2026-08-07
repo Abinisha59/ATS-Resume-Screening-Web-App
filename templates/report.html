@@ -2,134 +2,133 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <title>Resume Report</title>
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Analysis</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
           rel="stylesheet">
-
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
 </head>
 
 <body>
 
-<div class="background-shape shape1"></div>
-<div class="background-shape shape2"></div>
+<nav>
+    <div class="logo">ATS Resume Screening</div>
 
-<div class="report-container">
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/history">History</a></li>
+        <li><a href="/download">Download PDF</a></li>
+    </ul>
+</nav>
 
-    <div class="report-header">
+<div class="dashboard">
 
-        <h1>
+    <h1>Resume Analysis Dashboard</h1>
 
-            <i class="bi bi-file-earmark-check-fill"></i>
+    <p class="subtitle">
+        {{ role }}
+    </p>
 
-            Resume Screening Report
+    <div class="score-circle">
 
-        </h1>
+        <div class="circle">
 
-        <p>{{ role }}</p>
-
-    </div>
-
-    <div class="score-card">
-
-        <h2>Resume Score</h2>
-
-        <div class="score-circle">
-
-            {{ percentage }}%
+            <span>{{ percentage }}%</span>
 
         </div>
 
-        {% if percentage >= 90 %}
-
-        <span class="badge excellent">
-
-            Excellent Match
-
-        </span>
-
-        {% elif percentage >= 70 %}
-
-        <span class="badge good">
-
-            Good Match
-
-        </span>
-
-        {% elif percentage >= 50 %}
-
-        <span class="badge average">
-
-            Average Match
-
-        </span>
-
-        {% else %}
-
-        <span class="badge poor">
-
-            Needs Improvement
-
-        </span>
-
-        {% endif %}
+        <h2>ATS Match Score</h2>
 
     </div>
 
-    <div class="cards">
+    <div class="progress">
 
-        <div class="skill-card">
+        <div class="progress-fill"
+             style="width: {{ percentage }}%;">
 
-            <h3>
+        </div>
 
-                <i class="bi bi-check-circle-fill"></i>
+    </div>
 
-                Matched Skills
+    <div class="summary">
 
-            </h3>
+        <div class="summary-card">
 
-            <ul>
+            <h3>{{ matched|length }}</h3>
+
+            <p>Matched Skills</p>
+
+        </div>
+
+        <div class="summary-card">
+
+            <h3>{{ missing|length }}</h3>
+
+            <p>Missing Skills</p>
+
+        </div>
+
+        <div class="summary-card">
+
+            <h3>{{ percentage }}%</h3>
+
+            <p>ATS Score</p>
+
+        </div>
+
+    </div>
+
+    <div class="skills-grid">
+
+        <div class="skills-card">
+
+            <h2>Matched Skills</h2>
+
+            {% if matched %}
 
                 {% for skill in matched %}
 
-                <li>✔ {{ skill }}</li>
+                    <span class="skill success">
+
+                        {{ skill }}
+
+                    </span>
 
                 {% endfor %}
 
-            </ul>
+            {% else %}
+
+                <p>No matched skills found.</p>
+
+            {% endif %}
 
         </div>
 
-        <div class="skill-card">
+        <div class="skills-card">
 
-            <h3>
+            <h2>Missing Skills</h2>
 
-                <i class="bi bi-x-circle-fill"></i>
-
-                Missing Skills
-
-            </h3>
-
-            <ul>
+            {% if missing %}
 
                 {% for skill in missing %}
 
-                <li>✖ {{ skill }}</li>
+                    <span class="skill danger">
+
+                        {{ skill }}
+
+                    </span>
 
                 {% endfor %}
 
-            </ul>
+            {% else %}
+
+                <p>No missing skills.</p>
+
+            {% endif %}
 
         </div>
 
@@ -137,56 +136,45 @@
 
     <div class="recommendation">
 
-        <h3>
+        <h2>Recommendations</h2>
 
-            <i class="bi bi-lightbulb-fill"></i>
+        <ul>
 
-            Recommendation
+            {% if missing %}
 
-        </h3>
+                {% for skill in missing %}
 
-        {% if percentage >= 90 %}
+                    <li>
+                        Improve your knowledge of <strong>{{ skill }}</strong>.
+                    </li>
 
-        <p>
-            Excellent resume! Your profile closely matches the selected role. Continue building projects and keep your GitHub active.
-        </p>
+                {% endfor %}
 
-        {% elif percentage >= 70 %}
+            {% else %}
 
-        <p>
-            Your resume is strong. Learning the missing skills and adding one more project will make it even more competitive.
-        </p>
+                <li>
+                    Excellent! Your resume matches all detected skills.
+                </li>
 
-        {% elif percentage >= 50 %}
+            {% endif %}
 
-        <p>
-            You have a good foundation. Focus on the missing technologies, update your resume, and build one practical project using them.
-        </p>
-
-        {% else %}
-
-        <p>
-            Your resume needs improvement for this role. Learn the missing skills, create projects demonstrating them, and revise your resume before applying.
-        </p>
-
-        {% endif %}
+        </ul>
 
     </div>
 
     <div class="buttons">
 
-        <a href="/" class="btn secondary">
+        <a href="/download" class="btn">
 
-            <i class="bi bi-arrow-left"></i>
+            Download PDF
+
+        </a>
+
+        <a href="/" class="btn secondary">
 
             Analyze Another Resume
 
         </a>
-
-       <a href="/download" class="btn primary">
-          <i class="bi bi-download"></i>
-        Download PDF Report
-       </a>
 
     </div>
 

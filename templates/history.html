@@ -1,22 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
-    <title>Analysis History</title>
+<meta charset="UTF-8">
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='style.css') }}">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>History</title>
+
+<link rel="stylesheet"
+href="{{ url_for('static',
+filename='style.css') }}">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap"
+rel="stylesheet">
 
 </head>
 
 <body>
 
-<div class="container">
+<nav>
 
-<h1>Resume Analysis History</h1>
+<div class="logo">
 
-<table>
+ATS Resume Screening
+
+</div>
+
+<ul>
+
+<li><a href="/">Home</a></li>
+
+<li><a href="/history">History</a></li>
+
+</ul>
+
+</nav>
+
+<div class="history-page">
+
+<h1>
+
+Resume Analysis History
+
+</h1>
+
+<p>
+
+Previously analyzed resumes
+
+</p>
+
+<input
+type="text"
+id="search"
+placeholder="Search resume..."
+onkeyup="searchTable()"
+>
+
+<table id="historyTable">
+
+<thead>
 
 <tr>
 
@@ -30,25 +76,79 @@
 
 </tr>
 
-{% for row in history %}
+</thead>
+
+<tbody>
+
+{% for item in history %}
 
 <tr>
 
-<td>{{ row[0] }}</td>
+<td>{{ item[0] }}</td>
 
-<td>{{ row[1] }}</td>
+<td>{{ item[1] }}</td>
 
-<td>{{ row[2] }}%</td>
+<td>
 
-<td>{{ row[3] }}</td>
+<span class="score-badge">
+
+{{ item[2] }}%
+
+</span>
+
+</td>
+
+<td>{{ item[3] }}</td>
 
 </tr>
 
 {% endfor %}
 
+</tbody>
+
 </table>
 
+<a href="/" class="btn">
+
+Analyze Another Resume
+
+</a>
+
 </div>
+
+<script>
+
+function searchTable(){
+
+let input=document.getElementById("search");
+
+let filter=input.value.toUpperCase();
+
+let table=document.getElementById("historyTable");
+
+let tr=table.getElementsByTagName("tr");
+
+for(let i=1;i<tr.length;i++){
+
+let td=tr[i].getElementsByTagName("td")[0];
+
+if(td){
+
+let txt=td.textContent;
+
+tr[i].style.display=
+
+txt.toUpperCase().indexOf(filter)>-1?
+
+"": "none";
+
+}
+
+}
+
+}
+
+</script>
 
 </body>
 
