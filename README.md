@@ -104,6 +104,10 @@ http://127.0.0.1:5000
 * Email report delivery
 * Dashboard with analytics
 
+## 🔗 Live Demo
+
+https://ats-resume-screening-web-app.onrender.com
+
 ---
 
 ## Author
